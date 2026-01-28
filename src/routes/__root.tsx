@@ -1,28 +1,68 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
+
+import { GridBackgroundAscii } from '@/components/GridBackgroundAscii';
+import { SiteHeader } from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const Route = createRootRoute({
   component: Root,
 })
 
-function Root() {
-  return (
-    <div style={{ fontFamily: 'system-ui', padding: 24, maxWidth: 900, margin: '0 auto' }}>
-      <header style={{ display: 'flex', gap: 16, alignItems: 'baseline', marginBottom: 24 }}>
-        <h1 style={{ margin: 0, fontSize: 22 }}>DJ’s Portfolio</h1>
-        <nav style={{ display: 'flex', gap: 12 }}>
-          <Link to="/" activeProps={{ style: { fontWeight: 700 } }}>Home</Link>
-          <Link to="/projects" activeProps={{ style: { fontWeight: 700 } }}>Projects</Link>
-          <Link to="/about" activeProps={{ style: { fontWeight: 700 } }}>About</Link>
-        </nav>
-      </header>
+type ThemeMode = 'light' | 'dark' | 'system'
 
-      <main>
+const THEME_STORAGE_KEY = 'theme-preference'
+
+const getStoredTheme = (): ThemeMode => {
+  if (typeof window === 'undefined') return 'system'
+  const stored = window.localStorage.getItem(THEME_STORAGE_KEY)
+  if (stored === 'light' || stored === 'dark' || stored === 'system') return stored
+  return 'system'
+}
+
+const getSystemTheme = () => {
+  if (typeof window === 'undefined') return 'light'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+const applyTheme = (mode: ThemeMode) => {
+  const theme = mode === 'system' ? getSystemTheme() : mode
+  document.documentElement.setAttribute('data-theme', theme)
+  document.documentElement.setAttribute('data-theme-mode', mode)
+}
+
+function Root() {
+  const [themeMode, setThemeMode] = useState<ThemeMode>(() => getStoredTheme())
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    applyTheme(themeMode)
+    window.localStorage.setItem(THEME_STORAGE_KEY, themeMode)
+  }, [themeMode])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (themeMode !== 'system') return
+
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = () => applyTheme('system')
+
+    media.addEventListener('change', handleChange)
+    return () => media.removeEventListener('change', handleChange)
+  }, [themeMode])
+
+  return (
+    <div className="app-root">
+      <GridBackgroundAscii />
+      <SiteHeader themeMode={themeMode} onThemeChange={setThemeMode} />
+
+      <main className="site-main" style={{ position: "relative", zIndex: 1 }}>
+        <div className="content">
         <Outlet />
+        </div>
       </main>
 
-      <footer style={{ marginTop: 40, opacity: 0.6, fontSize: 12 }}>
-        © {new Date().getFullYear()}
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

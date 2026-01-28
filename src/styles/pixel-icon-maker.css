@@ -1,0 +1,143 @@
+.pixelIconMaker {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.pixelIconMaker__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: end;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  background: rgba(0,0,0,0.02);
+  margin-bottom: 12px;
+}
+
+.pixelIconMaker__field {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.pixelIconMaker__select,
+.pixelIconMaker__color {
+  height: 32px;
+  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 10px;
+  background: white;
+}
+
+.pixelIconMaker__toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 10px;
+  background: white;
+  font-size: 12px;
+}
+
+.pixelIconMaker__btn {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+}
+
+.pixelIconMaker__btnPrimary {
+  border-color: rgba(0,0,0,0.35);
+  font-weight: 600;
+}
+
+.pixelIconMaker__hint {
+  flex-basis: 100%;
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 4px;
+}
+
+.pixelIconMaker__grid {
+  display: grid;
+  grid-template-columns: repeat(24, 14px);
+  grid-template-rows: repeat(24, 14px);
+  gap: 1px;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  background:
+    linear-gradient(45deg, rgba(0,0,0,0.04) 25%, transparent 25%) 0 0 / 16px 16px,
+    linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.04) 75%) 0 0 / 16px 16px,
+    linear-gradient(45deg, rgba(0,0,0,0.04) 25%, transparent 25%) 8px 8px / 16px 16px,
+    linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.04) 75%) 8px 8px / 16px 16px;
+}
+
+.pixelIconMaker__cell {
+  width: 14px;
+  height: 14px;
+  padding: 0px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 0px;
+  background: transparent;
+  cursor: crosshair;
+}
+
+.pixelIconMaker__right {
+  display: grid;
+  gap: 12px;
+}
+
+.pixelIconMaker__previewCard,
+.pixelIconMaker__codeCard {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 12px;
+  background: white;
+}
+
+.pixelIconMaker__previewHeader,
+.pixelIconMaker__codeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pixelIconMaker__previewTitle,
+.pixelIconMaker__codeTitle {
+  font-weight: 700;
+}
+
+.pixelIconMaker__previewNote {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.pixelIconMaker__preview {
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(0,0,0,0.02);
+}
+
+.pixelIconMaker__textarea {
+  width: 100%;
+  height: 240px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.35;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.18);
+  resize: vertical;
+}

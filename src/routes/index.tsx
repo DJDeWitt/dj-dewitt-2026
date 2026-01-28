@@ -1,14 +1,7 @@
+// src/routes/index.tsx
 import { createFileRoute } from '@tanstack/react-router'
+import { HomePage } from '@/pages/Home/HomePage'
 
 export const Route = createFileRoute('/')({
-  component: Home,
+  component: HomePage,
 })
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-      <p>This is a minimal Vite + TanStack Router SPA deployed on Heroku.</p>
-    </div>
-  )
-}

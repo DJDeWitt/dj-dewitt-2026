@@ -1,68 +1,268 @@
+/* =========================
+   Font Definitions
+   ========================= */
+
+@import "./styles/fonts.css";
+@import './styles/home.css';
+@import './styles/icons.css';
+@import './routes/software/software.css';
+@import './styles/header.css';
+@import './styles/footer.css';
+
+@import './styles/pixel-icon-maker.css';
+
+/* @import './styles/glass.css'; */
+
+/* =========================
+   Theme Tokens
+   ========================= */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-bg: #f8f6f1;
+  --color-surface: rgba(255, 255, 255, 0.78);
+  --color-text: #1b1b1d;
+  --color-muted: #5b5b62;
+  --color-border: #d9d3c7;
+  --color-pill: #efe8db;
+  --color-pill-border: #d2c8b8;
+  --color-pill-active: #1f1c17;
+  --color-pill-active-text: #f7f3ec;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+[data-theme="dark"] {
+  --color-bg: #141312;
+  --color-surface: rgba(22, 21, 20, 0.78);
+  --color-text: #f4f1eb;
+  --color-muted: #bdb6ab;
+  --color-border: #33302b;
+  --color-pill: #24221e;
+  --color-pill-border: #3b372f;
+  --color-pill-active: #f4f1eb;
+  --color-pill-active-text: #1a1814;
 }
-a:hover {
-  color: #535bf2;
+
+/* =========================
+   Global Resets
+   ========================= */
+
+html {
+  font-size: var(--font-size-base);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+
+/* Background Grid Temporary */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: white; /* canvas also paints white, but this avoids flashes */
+}
+
+/* =========================
+   Headings / Display Text
+   ========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  line-height: var(--line-height-tight);
+  margin: 0 0 0.5em 0;
+  font-weight: 700;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: -0.02em;
 }
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.015em;
+}
+
+
+/* =========================
+   Body Text
+   ========================= */
+
+p {
+  margin: 0 0 1.25em 0;
+}
+
+
+/* =========================
+   UI / Meta Text
+   ========================= */
+
+nav,
+button,
+label,
+input,
+textarea,
+small,
+.meta,
+.caption {
+  font-family: var(--font-ui);
+  line-height: 1.4;
+}
+
+
+/* =========================
+   Code
+   ========================= */
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+
+
+/* Global styles and layout */
+
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Base layout */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main grows to fill */
+.site-main {
+  flex: 1;
+}
+
+/* Full-width sections, centered content */
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--color-pill);
+  border: 1px solid var(--color-pill-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.theme-toggle__button {
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.theme-toggle__button[data-active="true"] {
+  background: var(--color-pill-active);
+  color: var(--color-pill-active-text);
+}
+
+.theme-toggle__button:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.theme-toggle__status {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  padding-right: 6px;
+}
+
+/* Responsive margins */
+@media (max-width: 768px) {
+  .content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* Content */
+.sheet {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  margin: 24px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.152);
+}
+
+.software-title .icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+  margin-right: 0.35em;
+}
+
+/* Buttons */
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-weight: 700;
+  transition: all 0.2s;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: #cfef00;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  background: #c4e201;
+}
+
+button > svg {
+  width: 34px;
+  margin-left: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+button:hover svg {
+  transform: translateX(5px);
+}
+
+button:active {
+  transform: scale(0.95);
 }

@@ -12,6 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WritingIndexRouteImport } from './routes/writing/index'
+import { Route as SoftwareIndexRouteImport } from './routes/software/index'
+import { Route as GamesIndexRouteImport } from './routes/games/index'
+import { Route as SoftwarePixelSvgIndexRouteImport } from './routes/software/pixel-svg/index'
 
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
@@ -28,35 +32,93 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WritingIndexRoute = WritingIndexRouteImport.update({
+  id: '/writing/',
+  path: '/writing/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SoftwareIndexRoute = SoftwareIndexRouteImport.update({
+  id: '/software/',
+  path: '/software/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesIndexRoute = GamesIndexRouteImport.update({
+  id: '/games/',
+  path: '/games/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SoftwarePixelSvgIndexRoute = SoftwarePixelSvgIndexRouteImport.update({
+  id: '/software/pixel-svg/',
+  path: '/software/pixel-svg/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/projects': typeof ProjectsRoute
+  '/games': typeof GamesIndexRoute
+  '/software': typeof SoftwareIndexRoute
+  '/writing': typeof WritingIndexRoute
+  '/software/pixel-svg': typeof SoftwarePixelSvgIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/projects': typeof ProjectsRoute
+  '/games': typeof GamesIndexRoute
+  '/software': typeof SoftwareIndexRoute
+  '/writing': typeof WritingIndexRoute
+  '/software/pixel-svg': typeof SoftwarePixelSvgIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/projects': typeof ProjectsRoute
+  '/games/': typeof GamesIndexRoute
+  '/software/': typeof SoftwareIndexRoute
+  '/writing/': typeof WritingIndexRoute
+  '/software/pixel-svg/': typeof SoftwarePixelSvgIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/projects'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/projects'
+    | '/games'
+    | '/software'
+    | '/writing'
+    | '/software/pixel-svg'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/projects'
-  id: '__root__' | '/' | '/about' | '/projects'
+  to:
+    | '/'
+    | '/about'
+    | '/projects'
+    | '/games'
+    | '/software'
+    | '/writing'
+    | '/software/pixel-svg'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/projects'
+    | '/games/'
+    | '/software/'
+    | '/writing/'
+    | '/software/pixel-svg/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ProjectsRoute: typeof ProjectsRoute
+  GamesIndexRoute: typeof GamesIndexRoute
+  SoftwareIndexRoute: typeof SoftwareIndexRoute
+  WritingIndexRoute: typeof WritingIndexRoute
+  SoftwarePixelSvgIndexRoute: typeof SoftwarePixelSvgIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +144,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/writing/': {
+      id: '/writing/'
+      path: '/writing'
+      fullPath: '/writing'
+      preLoaderRoute: typeof WritingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/software/': {
+      id: '/software/'
+      path: '/software'
+      fullPath: '/software'
+      preLoaderRoute: typeof SoftwareIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games/': {
+      id: '/games/'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/software/pixel-svg/': {
+      id: '/software/pixel-svg/'
+      path: '/software/pixel-svg'
+      fullPath: '/software/pixel-svg'
+      preLoaderRoute: typeof SoftwarePixelSvgIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +179,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ProjectsRoute: ProjectsRoute,
+  GamesIndexRoute: GamesIndexRoute,
+  SoftwareIndexRoute: SoftwareIndexRoute,
+  WritingIndexRoute: WritingIndexRoute,
+  SoftwarePixelSvgIndexRoute: SoftwarePixelSvgIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

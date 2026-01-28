@@ -1,0 +1,54 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+
+  /* Optional polish */
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 50/50 columns */
+.hero__copy,
+.hero__visual {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.hero__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Stack on small screens */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    background-color: aliceblue;
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__copy,
+  .hero__visual {
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+
+  /* Explicit order safety */
+  .hero__copy {
+    order: 1;
+  }
+
+  .hero__visual {
+    order: 2;
+  }
+
+  .hero__image {
+    width: 50%;
+  }
+}
